@@ -1,0 +1,26 @@
+@model P.GameShopSystem.Web.Models.Catalog.HomeCatalogViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<section class="space-y-4">
+    <h1 class="text-3xl font-bold">Game Catalog</h1>
+    <p class="text-slate-400">Browse active games from API.</p>
+</section>
+
+@if (Model.Games.Count == 0)
+{
+    <p class="mt-8 rounded-lg border border-slate-700 p-4 text-slate-300">No active games available.</p>
+}
+else
+{
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        @foreach (var game in Model.Games)
+        {
+            <article class="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+                <h2 class="text-lg font-semibold">@game.Title</h2>
+                <p class="text-sm text-slate-400">Condition: @(game.GameCondition ?? "N/A")</p>
+                <p class="text-sm text-slate-400">Stock: @game.StockQuantity</p>
+                <p class="mt-3 text-indigo-300 font-semibold">$@game.Price</p>
+            </article>
+        }
+    </div>
+}
