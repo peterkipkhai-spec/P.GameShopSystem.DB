@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="P.GameShopSystem.API/P.GameShopSystem.API.csproj" />
-  <Project Path="P.GameShopSystem.DB/P.GameShopSystem.DB.csproj" />
-  <Project Path="P.GameShopSystem.WebForm/P.GameShopSystem.WebForm.csproj" />
-</Solution>
