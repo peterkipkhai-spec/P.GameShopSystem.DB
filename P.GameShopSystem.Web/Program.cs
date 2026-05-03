@@ -1,5 +1,3 @@
-// Legacy compatibility file for merge conflict resolution.
-// Active Web project entrypoint is under: P.GameShopSystem.Web/Program.cs
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
