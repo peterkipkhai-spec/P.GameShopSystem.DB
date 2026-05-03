@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P.GameShopSystem.API.Contracts.Auth;
 using P.GameShopSystem.DB.Models;
+using P.GameShopSystem.Domain.Entities;
 
 namespace P.GameShopSystem.API.Controllers;
 
@@ -31,7 +32,7 @@ public class AuthController(GameShopDbContext dbContext) : ControllerBase
             Email = string.IsNullOrWhiteSpace(request.Email) ? null : request.Email.Trim(),
             PasswordHash = Hash(request.Password),
             Address = string.IsNullOrWhiteSpace(request.Address) ? null : request.Address.Trim(),
-            Role = "Customer"
+            Role = UserRole.Customer
         };
 
         await dbContext.Users.AddAsync(user, cancellationToken);
@@ -67,7 +68,7 @@ public class AuthController(GameShopDbContext dbContext) : ControllerBase
             user.FullName,
             user.PhoneNumber,
             user.Email,
-            user.Role ?? "Customer",
+            user.Role ?? UserRole.Customer,
             token);
     }
 
