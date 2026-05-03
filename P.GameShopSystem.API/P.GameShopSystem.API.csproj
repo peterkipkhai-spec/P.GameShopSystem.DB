@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\P.GameShopSystem.DB\P.GameShopSystem.DB.csproj" />
+    <ProjectReference Include="..\P.GameShopSystem.Domain\P.GameShopSystem.Domain.csproj" />
   </ItemGroup>
 
 </Project>

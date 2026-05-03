@@ -1,12 +1,8 @@
-# GameShop Note
+# Game Shop System
 
-## Final Clean Architecture (No Extra Layer)
-- `P.GameShopSystem.Domain` → domain constants/entities only.
-- `P.GameShopSystem.DB` → database-first EF Core models + `GameShopDbContext` only.
-- `P.GameShopSystem.API` → all business logic + API endpoints.
-- `P.GameShopSystem.Web` → MVC UI only (calls API via `HttpClient`).
+Game Shop System is a clean-architecture sample for a game store platform with separated Domain, DB, API, and Web projects.
 
-## User Stories (DevTrack Style)
+## User Stories
 
 ### 1) Authentication
 - As a customer, I want to register with phone and password so I can create an account.
@@ -44,5 +40,8 @@
 - As an admin, I want to see all orders so I can process fulfillment.
 - As an admin, I want to update order status (Pending/Processing/Completed/Cancelled) so workflow is controlled.
 
-## Conflict Resolution Rule
-If GitHub shows conflict markers, keep `P.GameShopSystem.*` paths as final structure and manually merge content, then delete old duplicate path files before completing merge.
+## Solution Structure
+- `P.GameShopSystem.Domain` → domain constants/entities.
+- `P.GameShopSystem.DB` → EF Core database models and DbContext.
+- `P.GameShopSystem.API` → API endpoints and business logic.
+- `P.GameShopSystem.Web` → MVC web client consuming API.

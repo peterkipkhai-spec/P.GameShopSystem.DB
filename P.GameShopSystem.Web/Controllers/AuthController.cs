@@ -26,7 +26,7 @@ public sealed class AuthController(IHttpClientFactory httpClientFactory) : Contr
         var auth = await response.Content.ReadFromJsonAsync<AuthResponseViewModel>(cancellationToken: cancellationToken);
         TempData["AuthMessage"] = $"Welcome back, {auth?.FullName}!";
 
-        return RedirectToAction(nameof(Login));
+        return RedirectToAction("Index", "Home");
     }
 
     [HttpGet]
