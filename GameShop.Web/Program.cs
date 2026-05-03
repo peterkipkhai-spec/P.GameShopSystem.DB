@@ -1,5 +1,3 @@
-// Compatibility file for GitHub merge conflict resolution.
-// Main active web app remains: P.GameShopSystem.Web
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
