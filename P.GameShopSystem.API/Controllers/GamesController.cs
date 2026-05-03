@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P.GameShopSystem.API.Contracts.Games;
 using P.GameShopSystem.DB.Models;
+using P.GameShopSystem.Domain.Entities;
 
 namespace P.GameShopSystem.API.Controllers;
 
@@ -28,6 +29,11 @@ public class GamesController(GameShopDbContext dbContext) : ControllerBase
         var existsCategory = await dbContext.Categories.AnyAsync(c => c.CategoryId == request.CategoryId, cancellationToken);
         if (!existsCategory) return BadRequest("Invalid category id.");
 
+        if (!string.IsNullOrWhiteSpace(request.GameCondition) && !GameCondition.All.Contains(request.GameCondition.Trim()))
+        {
+            return BadRequest("Invalid game condition.");
+        }
+
         var game = new Game
         {
             Title = request.Title.Trim(),
@@ -49,6 +55,11 @@ public class GamesController(GameShopDbContext dbContext) : ControllerBase
     {
         var game = await dbContext.Games.FindAsync([id], cancellationToken);
         if (game is null) return NotFound();
+
+        if (!string.IsNullOrWhiteSpace(request.GameCondition) && !GameCondition.All.Contains(request.GameCondition.Trim()))
+        {
+            return BadRequest("Invalid game condition.");
+        }
 
         game.Title = request.Title.Trim();
         game.CategoryId = request.CategoryId;

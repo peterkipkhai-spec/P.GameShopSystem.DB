@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P.GameShopSystem.API.Contracts.Orders;
 using P.GameShopSystem.DB.Models;
+using P.GameShopSystem.Domain.Entities;
 
 namespace P.GameShopSystem.API.Controllers;
 
@@ -38,7 +39,7 @@ public class OrdersController(GameShopDbContext dbContext) : ControllerBase
         var order = new Order
         {
             UserId = request.UserId,
-            OrderStatus = "Pending",
+            OrderStatus = OrderStatus.Pending,
             OrderItems = new List<OrderItem>()
         };
 
@@ -72,7 +73,10 @@ public class OrdersController(GameShopDbContext dbContext) : ControllerBase
             .FirstOrDefaultAsync(o => o.OrderId == id, cancellationToken);
         if (order is null) return NotFound();
 
-        order.OrderStatus = request.OrderStatus.Trim();
+        var status = request.OrderStatus.Trim();
+        if (!OrderStatus.All.Contains(status)) return BadRequest("Invalid order status.");
+
+        order.OrderStatus = status;
         await dbContext.SaveChangesAsync(cancellationToken);
         return Ok(ToDto(order));
     }
@@ -82,6 +86,6 @@ public class OrdersController(GameShopDbContext dbContext) : ControllerBase
         var items = order.OrderItems.Select(i =>
             new OrderItemDto(i.OrderItemId, i.GameId, i.Game?.Title ?? string.Empty, i.Quantity, i.UnitPrice, i.Quantity * i.UnitPrice)).ToList();
 
-        return new OrderDto(order.OrderId, order.UserId, order.OrderDate, order.OrderStatus ?? "Pending", order.TotalAmount, items);
+        return new OrderDto(order.OrderId, order.UserId, order.OrderDate, order.OrderStatus ?? OrderStatus.Pending, order.TotalAmount, items);
     }
 }
