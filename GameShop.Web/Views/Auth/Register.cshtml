@@ -1,0 +1,15 @@
+@model GameShop.Web.Models.Auth.RegisterViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+<div class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
+    <h1 class="text-2xl font-semibold mb-6">Create account</h1>
+    <form method="post" class="space-y-3">
+        <input asp-for="FullName" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2" placeholder="Full name" />
+        <input asp-for="PhoneNumber" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2" placeholder="Phone number" />
+        <input asp-for="Email" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2" placeholder="Email" />
+        <input asp-for="Password" type="password" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2" placeholder="Password" />
+        <input asp-for="Address" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2" placeholder="Address" />
+        <span asp-validation-summary="ModelOnly" class="text-red-400 text-sm"></span>
+        <button class="w-full rounded-lg bg-indigo-500 hover:bg-indigo-400 px-4 py-2 font-medium">Register</button>
+    </form>
+    <a asp-action="Login" class="block mt-4 text-sm text-indigo-300">Already have an account? Login</a>
+</div>
